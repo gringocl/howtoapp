@@ -171,6 +171,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   launchy
+  minitest
   minitest-rails-capybara
   pg
   rails (= 4.0.2)
