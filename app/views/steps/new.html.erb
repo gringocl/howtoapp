@@ -1,5 +1,17 @@
-<h1>New step</h1>
-
+<h1><%= @task.name %></h1>
+<p>
+<%= @task.description  %>
+</p>
+<ol>
+  <% @task.steps.each do |s|  %>
+  <li>
+  <%= s.name  %> 
+  </li>
+  <p>
+  <%= s.description  %>
+  </p>
+  <% end  %>
+</ol>
 <%= render 'form' %>
 
-<%= link_to 'Back', steps_path %>
+<%= link_to 'Back', task_steps_path %>

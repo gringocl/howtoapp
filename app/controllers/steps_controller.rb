@@ -1,35 +1,32 @@
 class StepsController < ApplicationController
+  before_action :set_task
   before_action :set_step, only: [:show, :edit, :update, :destroy]
 
   def index
-    @steps = Step.all
+    @steps = @task.steps.all
   end
 
   def show
   end
 
   def new
-    @step = Step.new
+    @step = @task.steps.new
   end
 
   def edit
   end
 
   def create
-    @step = Step.new(step_params)
-      if @step.save
-        redirect_to @step, notice: 'Step was successfully created.'
-      else
-        render action: 'new'
-      end
+    @step.create(step_params)
+    @step.save ?
+      ( redirect_to task_steps_path, notice: 'Success' ) :
+      ( render action: 'new' )
   end
 
   def update
-    if @step.update(step_params)
-      redirect_to @step, notice: 'Step was successfully updated.'
-    else
-      render action: 'edit'
-    end
+    @step.update(step_params) ?
+      ( redirect_to task_steps_path, notice: 'Success' ) :
+      ( render action: 'edit' )
   end
 
   def destroy
@@ -39,10 +36,14 @@ class StepsController < ApplicationController
 
   private
     def set_step
-      @step = Step.find(params[:id])
+      @step = @task.steps.find(params[:id])
+    end
+
+    def set_task
+      @task = Task.find(params[:task_id])
     end
 
     def step_params
-      params[:step]
+      params.require(:step).permit(:name, :description)
     end
 end

@@ -10,12 +10,27 @@
       </ul>
     </div>
   <% end %>
-
-    <%= f.label :name  %>
-    <%= f.text_field :name  %>
-    <%= f.label :description  %>
-    <%= f.text_area :description  %>
+    <p>
+    <%= f.label 'Task'  %><br>
+      <%= f.text_field :name  %>
+    </p>
+    <p>
+      <%= f.label :description  %><br>
+      <%= f.text_area :description  %>
+    </p>
+    <ol>
+      <%= f.fields_for :steps do |builder|  %>
+      <li> <%= builder.label "Step" %><br> </li>
+        <%= builder.text_field :name %>
+      </p>
+      <p>
+        <%= builder.label :description  %><br>
+        <%= builder.text_area :description, rows: 5  %>
+      </p>
+      <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <p>
+      <%= f.submit %>
+    </p>
   </div>
-<% end %>
+  <% end %>

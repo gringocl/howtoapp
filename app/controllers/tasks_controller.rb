@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    3.times {@task.steps.build }
   end
 
   def edit
@@ -45,6 +46,9 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :description, step_attributes: [:name, :description])
+      params.require(:task).permit(:name,
+                                   :description,
+                                   steps_attributes:
+                                   [:name, :description, :task_id, :_destroy])
     end
 end
