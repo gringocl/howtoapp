@@ -1,10 +1,12 @@
 <ol>
   <h1><%= @task.name  %></h1>
+  <p> <%= @task.description  %> </p>
     <% @task.steps.each do |step| %>
     <li>
       <%= step.name  %>
       <p> <%= step.description  %> </p>
         <%= link_to 'Change Task', [:edit, @task, step]  %>
+        <%= link_to 'Destroy', [ @task, step ], method: :delete, data: { confirm: 'Are you sure?' } %> |
     </li>
     <% end %>
 
@@ -12,3 +14,4 @@
 
 </ol>
 <%= link_to 'New Step', new_task_step_path %>
+<%= link_to 'Tasks', tasks_path  %>

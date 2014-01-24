@@ -17,7 +17,7 @@ class StepsController < ApplicationController
   end
 
   def create
-    @step.create(step_params)
+    @step = @task.steps.create(step_params)
     @step.save ?
       ( redirect_to task_steps_path, notice: 'Success' ) :
       ( render action: 'new' )
@@ -31,7 +31,7 @@ class StepsController < ApplicationController
 
   def destroy
     @step.destroy
-    redirect_to steps_url
+    redirect_to task_steps_path
   end
 
   private

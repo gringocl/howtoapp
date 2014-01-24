@@ -1,4 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
+<h2>
+  <%= @task.name  %>
+</h2>
+
+<p>
+<%= @task.description  %>
+</p>
+
+<ol>
+  <% @task.steps.each do |s| %>
+    <li>
+    <%= s.name  %>
+      <p><%= s.description  %> </p>
+    </li>
+  <% end %>
+</ol>
+
+<%= link_to 'Destroy', @task, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Edit', [ :edit, @task ] %> |
 <%= link_to 'Back', tasks_path %>
+<%= link_to 'New Step', new_task_step_path(@task)  %>
